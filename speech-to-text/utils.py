@@ -19,7 +19,7 @@ _CACHE_DIR = mlhub.utils.create_package_cache_dir()
 _MODEL_FILE = os.getenv('MODEL_FILE', os.path.join("cache", "resources", "deepspeech-0.9.3-models.pbmm"))
 _SCORER_FILE = os.getenv('SCORER_FILE', os.path.join("cache", "resources", "deepspeech-0.9.3-models.scorer"))
 
-from deepspeech import Model, version
+from deepspeech import Model
 from timeit import default_timer as timer
 
 try:

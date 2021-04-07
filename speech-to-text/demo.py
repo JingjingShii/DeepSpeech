@@ -1,4 +1,4 @@
-import deepspeech.utils
+import utils
 import argparse
 import os
 
@@ -29,7 +29,7 @@ def main():
     scorer = os.path.join(os.getcwd(), "cache/resources/deepspeech-0.9.3-models.scorer")
     model = os.path.join(os.getcwd(), "cache/resources/deepspeech-0.9.3-models.pbmm")
 
-    deepspeech.utils.deepspeech(model, scorer, args.audio, args.beam_width, args.lm_alpha, args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
+    utils.deepspeech(model, scorer, args.audio, args.beam_width, args.lm_alpha, args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
 
 
 if __name__ == '__main__':
