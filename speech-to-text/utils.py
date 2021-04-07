@@ -86,7 +86,7 @@ def metadata_json_output(metadata):
     } for transcript in metadata.transcripts]
     return json.dumps(json_result, indent=2)
 
-def deepspeech(model, scorer, audio, beam_width="", lm_alpha="", lm_beta="", extended="", json="", candidate_transcripts="", hot_words=""):
+def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "", extended = "", json = "", candidate_transcripts = "", hot_words = ""):
 
     model_load_start = timer()
     # sphinx-doc: python_ref_model_start
