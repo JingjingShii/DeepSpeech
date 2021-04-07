@@ -12,6 +12,8 @@ dependencies:
   pip3:
     - deepspeech
     - numpy
+  pip:
+    - sox
   files:
     - speech-to-text/README.md
     - speech-to-text/demo.py
