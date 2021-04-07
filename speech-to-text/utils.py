@@ -3,6 +3,8 @@
 from __future__ import absolute_import, division, print_function
 
 import argparse
+import tempfile
+
 import numpy as np
 import shlex
 import subprocess
@@ -10,7 +12,8 @@ import sys
 import wave
 import json
 import os
-import mlhub
+from urllib.parse import urlparse
+import requests
 
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # or any {'0', '1', '2'}
@@ -116,26 +119,68 @@ def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "
             word,boost = word_boost.split(':')
             ds.addHotWord(word,float(boost))
 
-    fin = wave.open(audio, 'rb')
-    fs_orig = fin.getframerate()
-    if fs_orig != desired_sample_rate:
-        print('Warning: original sample rate ({}) is different than {}hz. Resampling might produce erratic speech recognition.'.format(fs_orig, desired_sample_rate), file=sys.stderr)
-        fs_new, audio = convert_samplerate(audio, desired_sample_rate)
-    else:
-        audio = np.frombuffer(fin.readframes(fin.getnframes()), np.int16)
+# Check if the audio is a file or url
+    result = urlparse(audio)
 
-    audio_length = fin.getnframes() * (1/fs_orig)
-    fin.close()
+    if all([result.scheme, result.netloc, result.path]):
+        if audio.find('/'):
+            audio_name = audio.rsplit('/', 1)[1]
+        else:
+            audio_name = "download.wav"
 
-    print('Running inference...', file=sys.stderr)
-    inference_start = timer()
-    # sphinx-doc: python_ref_inference_start
-    if extended:
-        print(metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0]))
-    elif json:
-        print(metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts)))
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        r = requests.get(audio, stream=True, headers=headers)
+        with tempfile.TemporaryDirectory(dir="/tmp") as tmpdirname:
+            audio = os.path.join(tmpdirname, audio_name)
+            open(audio, 'wb').write(r.content)
+            fin = wave.open(audio, 'rb')
+            fs_orig = fin.getframerate()
+            if fs_orig != desired_sample_rate:
+                print('Warning: original sample rate ({}) is different than {}hz. Resampling might produce erratic speech recognition.'.format(fs_orig, desired_sample_rate), file=sys.stderr)
+                fs_new, audio = convert_samplerate(audio, desired_sample_rate)
+            else:
+                audio = np.frombuffer(fin.readframes(fin.getnframes()), np.int16)
+
+            audio_length = fin.getnframes() * (1/fs_orig)
+            fin.close()
+
+            print('Running inference...', file=sys.stderr)
+            inference_start = timer()
+            # sphinx-doc: python_ref_inference_start
+            if extended:
+                print(metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0]))
+            elif json:
+                print(metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts)))
+            else:
+                print(ds.stt(audio))
+            # sphinx-doc: python_ref_inference_stop
+            inference_end = timer() - inference_start
+            print('Inference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length), file=sys.stderr)
+
     else:
-        print(ds.stt(audio))
-    # sphinx-doc: python_ref_inference_stop
-    inference_end = timer() - inference_start
-    print('Inference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length), file=sys.stderr)
+        fin = wave.open(audio, 'rb')
+        fs_orig = fin.getframerate()
+        if fs_orig != desired_sample_rate:
+            print(
+                'Warning: original sample rate ({}) is different than {}hz. Resampling might produce erratic speech recognition.'.format(
+                    fs_orig, desired_sample_rate), file=sys.stderr)
+            fs_new, audio = convert_samplerate(audio, desired_sample_rate)
+        else:
+            audio = np.frombuffer(fin.readframes(fin.getnframes()), np.int16)
+
+        audio_length = fin.getnframes() * (1 / fs_orig)
+        fin.close()
+
+        print('Running inference...', file=sys.stderr)
+        inference_start = timer()
+        # sphinx-doc: python_ref_inference_start
+        if extended:
+            print(metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0]))
+        elif json:
+            print(metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts)))
+        else:
+            print(ds.stt(audio))
+        # sphinx-doc: python_ref_inference_stop
+        inference_end = timer() - inference_start
+        print('Inference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length), file=sys.stderr)
+
