@@ -32,7 +32,7 @@ def main():
     model = os.path.join(os.getcwd(), "cache/deepspeech-0.9.3-models.pbmm")
     audio = os.path.join(os.getcwd(), "cache/audio-0.9.3.tar.gz")
 
-    audio_path = os.path.join(os.getcwd(), "/cache/audio")
+    audio_path = os.path.join(os.getcwd(), "cache/audio")
 
     audio_file_list = []
 
