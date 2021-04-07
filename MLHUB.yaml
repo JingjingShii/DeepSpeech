@@ -16,9 +16,9 @@ dependencies:
     - speech-to-text/README.md
     - speech-to-text/demo.py
     - speech-to-text/utils.py
-    - https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/audio-0.9.3.tar.gz: cache/resources/
-    - https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer: cache/resources/
-    - https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm: cache/resources/
+    - https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/audio-0.9.3.tar.gz: cache/
+    - https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer: cache/
+    - https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm: cache/
 
 commands:
   demo       : Demonstrate speech-to-text
