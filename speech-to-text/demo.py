@@ -38,7 +38,7 @@ def main():
 
     for filename in os.listdir(audio_path):
         if not filename.startswith(".") and filename.endswith("wav"):
-            audio_file_list.append(os.path.join(os.getcwd(), "audio/"+filename))
+            audio_file_list.append(os.path.join(os.getcwd(), "cache/audio/"+filename))
 
     mlcat("Deepspeech", "Welcome to a demo of pre-built model for deepspeech. TThis model is trained by machine learning techniques based "
                         "on Baidu's Deep Speech research paper (https://arxiv.org/abs/1412.5567), and implemented by Mozilla."
@@ -46,17 +46,17 @@ def main():
     mlask()
     mlcat("Demonstration", "Next we will demonstrate three examples from Mozilla example audio files.\n")
     mlask()
-    mlcat("First","The transcription in the first audio is Experience proves this")
+    mlcat("First","The transcription in the first audio is Experience proves this.\n")
     mlask()
     utils.deepspeech(model, scorer, audio_file_list[0], args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
     mlask()
-    mlcat("Second", "The transcription in the second audio is Why should one halt on the way?")
+    mlcat("Second", "The transcription in the second audio is Why should one halt on the way?\n")
     mlask()
     utils.deepspeech(model, scorer, audio_file_list[1], args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
     mlask()
-    mlcat("Third", "The transcription in the third audio is Your power is sufficient I said")
+    mlcat("Third", "The transcription in the third audio is Your power is sufficient I said.\n")
     mlask()
     utils.deepspeech(model, scorer, audio_file_list[2], args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
