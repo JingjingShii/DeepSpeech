@@ -32,10 +32,6 @@ def main():
     model = os.path.join(os.getcwd(), "cache/resources/deepspeech-0.9.3-models.pbmm")
     audio = os.path.join(os.getcwd(), "cache/resources/audio-0.9.3.tar.gz")
 
-    tar = tarfile.open(audio, "r:gz")
-    tar.extractall()
-    tar.close()
-
     audio_path = os.path.join(os.getcwd(), "audio")
 
     audio_file_list = []
