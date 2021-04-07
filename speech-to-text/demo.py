@@ -38,7 +38,7 @@ def main():
 
     for filename in os.listdir(audio_path):
         if not filename.startswith(".") and filename.endswith("wav"):
-            audio_file_list.append(os.path.join(os.getcwd(), "cache/audio/"+filename))
+            audio_file_list.append(filename)
 
     mlcat("Deepspeech", "Welcome to a demo of pre-built model for deepspeech. TThis model is trained by machine learning techniques based "
                         "on Baidu's Deep Speech research paper (https://arxiv.org/abs/1412.5567), and implemented by Mozilla."
