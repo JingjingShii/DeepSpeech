@@ -14,8 +14,6 @@ dependencies:
     - numpy
   pip:
     - sox
-    - playsound
-    - -U PyObjC
   files:
     - deepspeech/README.md
     - deepspeech/demo.py

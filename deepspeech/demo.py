@@ -3,7 +3,6 @@ import argparse
 import os
 import tarfile
 from mlhub.pkg import mlask, mlcat
-from playsound import playsound
 
 def main():
     parser = argparse.ArgumentParser(description='Running DeepSpeech inference.')
@@ -53,7 +52,7 @@ def main():
     # -----------------------------------------------------------------------
     # First audio
     # -----------------------------------------------------------------------
-    playsound(audio_file_list[0])
+    os.system(f'aplay {audio_file_list[0]}')
     mlcat("Experience proves this.", "The audio has been played and if you listen carefully you should hear:\n")
     mlcat("", "Experience proves this.\n")
     mlask()
@@ -64,7 +63,7 @@ def main():
     # -----------------------------------------------------------------------
     # Second audio
     # -----------------------------------------------------------------------
-    playsound(audio_file_list[1])
+    os.system(f'aplay {audio_file_list[1]}')
     mlcat("Why should one halt on the way?", "The audio has been played and if you listen carefully you should hear:\n")
     mlcat("", "Why should one halt on the way?\n")
     mlask()
@@ -75,7 +74,7 @@ def main():
     # -----------------------------------------------------------------------
     # Third audio
     # -----------------------------------------------------------------------
-    playsound(audio_file_list[2])
+    os.system(f'aplay {audio_file_list[3]}')
     mlcat("Your power is sufficient I said.", "The audio has been played and if you listen carefully you should hear:\n")
     mlcat("", "Your power is sufficient I said.\n")
     mlask()
