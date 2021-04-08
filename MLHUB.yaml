@@ -14,10 +14,10 @@ dependencies:
     - numpy
     - sox
   files:
-    - deepspeech/README.md
-    - deepspeech/demo.py
-    - deepspeech/utils.py
-    - deepspeech/transcribe.py
+    - mlhub/README.md
+    - mlhub/demo.py
+    - mlhub/utils.py
+    - mlhub/transcribe.py
     - https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/audio-0.9.3.tar.gz
     - https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
     - https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
