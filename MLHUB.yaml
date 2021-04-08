@@ -12,7 +12,6 @@ dependencies:
   pip3:
     - deepspeech
     - numpy
-  pip:
     - sox
   files:
     - deepspeech/README.md
@@ -25,4 +24,4 @@ dependencies:
 
 commands:
   demo       : deepspeech
-  transcribe : Generate text from audio file
+  transcribe : Transcribe text from audio file

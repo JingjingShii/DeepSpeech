@@ -30,6 +30,9 @@ def main():
                         help='If print out all the message')
     args = parser.parse_args()
 
+    # -----------------------------------------------------------------------
+    # Load pre-built models and samples
+    # -----------------------------------------------------------------------
     scorer = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.scorer")
     model = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.pbmm")
     audio = os.path.join(os.getcwd(), "audio-0.9.3.tar.gz")

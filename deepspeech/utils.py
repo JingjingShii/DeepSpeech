@@ -15,13 +15,7 @@ import os
 from urllib.parse import urlparse
 import requests
 
-
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # or any {'0', '1', '2'}
-
-# _CACHE_DIR = mlhub.utils.create_package_cache_dir()
-# _MODEL_FILE = os.getenv('MODEL_FILE', os.path.join("cache", "resources", "deepspeech-0.9.3-models.pbmm"))
-# _SCORER_FILE = os.getenv('SCORER_FILE', os.path.join("cache", "resources", "deepspeech-0.9.3-models.scorer"))
-# _SAMPLE_AUDIO = os.getenv('SAMPLE_AUDIO', os.path.join("cache", "resources", "audio-0.9.3.tar.gz"))
 
 from deepspeech import Model
 from timeit import default_timer as timer
@@ -123,7 +117,7 @@ def deepspeech(model, scorer, audio, verbose=True, beam_width = "", lm_alpha = "
             word,boost = word_boost.split(':')
             ds.addHotWord(word,float(boost))
 
-# Check if the audio is a file or url
+    # Check if the audio is a file or url
     result = urlparse(audio)
 
     if all([result.scheme, result.netloc, result.path]):

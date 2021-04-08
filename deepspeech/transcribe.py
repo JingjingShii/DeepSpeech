@@ -3,6 +3,11 @@ import argparse
 import os
 
 def main():
+
+    # -----------------------------------------------------------------------
+    # Load pre-built models
+    # -----------------------------------------------------------------------
+
     scorer = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.scorer")
     model = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.pbmm")
 
