@@ -29,10 +29,12 @@ def main():
                         help='Number of candidate transcripts to include in JSON output')
     parser.add_argument('--hot_words', type=str,
                         help='Hot-words and their boosts.')
+    parser.add_argument('--verbose', type=bool, default= True,
+                        help='If print out all the message')
     args = parser.parse_args()
 
     utils.deepspeech(args.model, args.scorer, args.audio, args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
+                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words, args.verbose)
 
 
 if __name__ == '__main__':

@@ -26,6 +26,8 @@ def main():
                         help='Number of candidate transcripts to include in JSON output')
     parser.add_argument('--hot_words', type=str,
                         help='Hot-words and their boosts.')
+    parser.add_argument('--verbose', type=bool, default= True,
+                        help='If print out all the message')
     args = parser.parse_args()
 
     scorer = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.scorer")
@@ -57,7 +59,7 @@ def main():
     mlcat("", "Experience proves this.\n")
     mlask()
     utils.deepspeech(model, scorer, audio_file_list[0], args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
+                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words, args.verbose)
     mlask()
 
     # -----------------------------------------------------------------------
@@ -68,7 +70,7 @@ def main():
     mlcat("", "Why should one halt on the way?\n")
     mlask()
     utils.deepspeech(model, scorer, audio_file_list[1], args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
+                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words, args.verbose)
     mlask()
 
     # -----------------------------------------------------------------------
@@ -79,7 +81,7 @@ def main():
     mlcat("", "Your power is sufficient I said.\n")
     mlask()
     utils.deepspeech(model, scorer, audio_file_list[2], args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
+                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words, args.verbose)
 
 
 if __name__ == '__main__':

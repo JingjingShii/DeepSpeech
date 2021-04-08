@@ -89,14 +89,15 @@ def metadata_json_output(metadata):
     } for transcript in metadata.transcripts]
     return json.dumps(json_result, indent=2)
 
-def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "", extended = "", json = "", candidate_transcripts = "", hot_words = ""):
+def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "", extended = "", json = "", candidate_transcripts = "", hot_words = "", verbose=True):
 
     model_load_start = timer()
     # sphinx-doc: python_ref_model_start
     ds = Model(model)
     # sphinx-doc: python_ref_model_stop
     model_load_end = timer() - model_load_start
-    print('Loaded model in {:.3}s.'.format(model_load_end), file=sys.stderr)
+    if verbose:
+        print('Loaded model in {:.3}s.'.format(model_load_end), file=sys.stderr)
 
     if beam_width:
         ds.setBeamWidth(beam_width)
@@ -104,17 +105,20 @@ def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "
     desired_sample_rate = ds.sampleRate()
 
     if scorer:
-        print('Loading scorer from files {}'.format(scorer), file=sys.stderr)
+        if verbose:
+            print('Loading scorer from files {}'.format(scorer), file=sys.stderr)
         scorer_load_start = timer()
         ds.enableExternalScorer(scorer)
         scorer_load_end = timer() - scorer_load_start
-        print('Loaded scorer in {:.3}s.'.format(scorer_load_end), file=sys.stderr)
+        if verbose:
+            print('Loaded scorer in {:.3}s.'.format(scorer_load_end), file=sys.stderr)
 
         if lm_alpha and lm_beta:
             ds.setScorerAlphaBeta(lm_alpha, lm_beta)
 
     if hot_words:
-        print('Adding hot-words', file=sys.stderr)
+        if verbose:
+            print('Adding hot-words', file=sys.stderr)
         for word_boost in hot_words.split(','):
             word,boost = word_boost.split(':')
             ds.addHotWord(word,float(boost))
@@ -136,7 +140,8 @@ def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "
             fin = wave.open(audio, 'rb')
             fs_orig = fin.getframerate()
             if fs_orig != desired_sample_rate:
-                print('Warning: original sample rate ({}) is different than {}hz. Resampling might produce erratic speech recognition.'.format(fs_orig, desired_sample_rate), file=sys.stderr)
+                if verbose:
+                    print('Warning: original sample rate ({}) is different than {}hz. Resampling might produce erratic speech recognition.'.format(fs_orig, desired_sample_rate), file=sys.stderr)
                 fs_new, audio = convert_samplerate(audio, desired_sample_rate)
             else:
                 audio = np.frombuffer(fin.readframes(fin.getnframes()), np.int16)
@@ -144,7 +149,8 @@ def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "
             audio_length = fin.getnframes() * (1/fs_orig)
             fin.close()
 
-            print('Running inference to transcribe the audio...', file=sys.stderr)
+            if verbose:
+                print('Running inference to transcribe the audio...', file=sys.stderr)
             inference_start = timer()
             # sphinx-doc: python_ref_inference_start
             if extended:
@@ -155,15 +161,17 @@ def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "
                 print(ds.stt(audio))
             # sphinx-doc: python_ref_inference_stop
             inference_end = timer() - inference_start
-            print('Inference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length), file=sys.stderr)
+            if verbose:
+                print('Inference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length), file=sys.stderr)
 
     else:
         fin = wave.open(audio, 'rb')
         fs_orig = fin.getframerate()
         if fs_orig != desired_sample_rate:
-            print(
-                'Warning: original sample rate ({}) is different than {}hz. Resampling might produce erratic speech recognition.'.format(
-                    fs_orig, desired_sample_rate), file=sys.stderr)
+            if verbose:
+                print(
+                    'Warning: original sample rate ({}) is different than {}hz. Resampling might produce erratic speech recognition.'.format(
+                        fs_orig, desired_sample_rate), file=sys.stderr)
             fs_new, audio = convert_samplerate(audio, desired_sample_rate)
         else:
             audio = np.frombuffer(fin.readframes(fin.getnframes()), np.int16)
@@ -171,7 +179,8 @@ def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "
         audio_length = fin.getnframes() * (1 / fs_orig)
         fin.close()
 
-        print('Running inference to transcribe the audio...', file=sys.stderr)
+        if verbose:
+            print('Running inference to transcribe the audio...', file=sys.stderr)
         inference_start = timer()
         # sphinx-doc: python_ref_inference_start
         if extended:
@@ -182,5 +191,6 @@ def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "
             print(ds.stt(audio))
         # sphinx-doc: python_ref_inference_stop
         inference_end = timer() - inference_start
-        print('Inference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length), file=sys.stderr)
+        if verbose:
+            print('Inference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length), file=sys.stderr)
 
