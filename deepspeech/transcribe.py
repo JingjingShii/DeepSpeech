@@ -33,8 +33,8 @@ def main():
                         help='If print out all the message')
     args = parser.parse_args()
 
-    utils.deepspeech(args.model, args.scorer, args.audio, args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words, args.verbose)
+    utils.deepspeech(args.model, args.scorer, args.audio, args.verbose, args.beam_width, args.lm_alpha,
+                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
 
 
 if __name__ == '__main__':

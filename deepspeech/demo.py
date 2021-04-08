@@ -56,12 +56,13 @@ def main():
     # -----------------------------------------------------------------------
     print("\n")
     os.system(f'aplay {audio_file_list[0]}')
-    mlcat("\nExperience proves this.", "The audio has been played and if you listen carefully you should hear:\n")
+    print("\n")
+    mlcat("Experience proves this.", "The audio has been played and if you listen carefully you should hear:\n")
     mlcat("", "Experience proves this.\n")
     mlask()
     print("\n")
-    utils.deepspeech(model, scorer, audio_file_list[0], args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words, args.verbose)
+    utils.deepspeech(model, scorer, audio_file_list[0], args.verbose, args.beam_width, args.lm_alpha,
+                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
     mlask()
 
     # -----------------------------------------------------------------------
@@ -69,12 +70,13 @@ def main():
     # -----------------------------------------------------------------------
     print("\n")
     os.system(f'aplay {audio_file_list[1]}')
-    mlcat("\nWhy should one halt on the way?", "The audio has been played and if you listen carefully you should hear:\n")
+    print("\n")
+    mlcat("Why should one halt on the way?", "The audio has been played and if you listen carefully you should hear:\n")
     mlcat("", "Why should one halt on the way?\n")
     mlask()
     print("\n")
-    utils.deepspeech(model, scorer, audio_file_list[1], args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words, args.verbose)
+    utils.deepspeech(model, scorer, audio_file_list[1], args.verbose, args.beam_width, args.lm_alpha,
+                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
     mlask()
 
     # -----------------------------------------------------------------------
@@ -82,12 +84,13 @@ def main():
     # -----------------------------------------------------------------------
     print("\n")
     os.system(f'aplay {audio_file_list[2]}')
-    mlcat("\nYour power is sufficient I said.", "The audio has been played and if you listen carefully you should hear:\n")
+    print("\n")
+    mlcat("Your power is sufficient I said.", "The audio has been played and if you listen carefully you should hear:\n")
     mlcat("", "Your power is sufficient I said.\n")
     mlask()
     print("\n")
-    utils.deepspeech(model, scorer, audio_file_list[2], args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words, args.verbose)
+    utils.deepspeech(model, scorer, audio_file_list[2], args.verbose, args.beam_width, args.lm_alpha,
+                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
 
 
 if __name__ == '__main__':
