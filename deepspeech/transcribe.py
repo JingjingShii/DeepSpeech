@@ -25,8 +25,8 @@ def main():
                         help='Hot-words and their boosts.')
     args = parser.parse_args()
 
-    scorer = os.path.join(os.getcwd(), "cache/deepspeech-0.9.3-models.scorer")
-    model = os.path.join(os.getcwd(), "cache/deepspeech-0.9.3-models.pbmm")
+    scorer = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.scorer")
+    model = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.pbmm")
 
     utils.deepspeech(model, scorer, args.audio, args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)

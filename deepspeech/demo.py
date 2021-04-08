@@ -28,17 +28,17 @@ def main():
                         help='Hot-words and their boosts.')
     args = parser.parse_args()
 
-    scorer = os.path.join(os.getcwd(), "cache/deepspeech-0.9.3-models.scorer")
-    model = os.path.join(os.getcwd(), "cache/deepspeech-0.9.3-models.pbmm")
-    audio = os.path.join(os.getcwd(), "cache/audio-0.9.3.tar.gz")
+    scorer = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.scorer")
+    model = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.pbmm")
+    audio = os.path.join(os.getcwd(), "audio-0.9.3.tar.gz")
 
-    audio_path = os.path.join(os.getcwd(), "cache/audio")
+    audio_path = os.path.join(os.getcwd(), "audio")
 
     audio_file_list = []
 
     for filename in os.listdir(audio_path):
         if not filename.startswith(".") and filename.endswith("wav"):
-            audio_file_list.append(os.path.join(os.getcwd(), "cache/audio/"+filename))
+            audio_file_list.append(os.path.join(os.getcwd(), "audio/"+filename))
 
     mlcat("Deepspeech", "Welcome to a demo of pre-built model for deepspeech. TThis model is trained by machine learning techniques based "
                         "on Baidu's Deep Speech research paper (https://arxiv.org/abs/1412.5567), and implemented by Mozilla."
