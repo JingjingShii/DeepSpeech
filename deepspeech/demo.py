@@ -3,6 +3,7 @@ import argparse
 import os
 import tarfile
 from mlhub.pkg import mlask, mlcat
+from playsound import playsound
 
 def main():
     parser = argparse.ArgumentParser(description='Running DeepSpeech inference.')
@@ -44,23 +45,39 @@ def main():
         if not filename.startswith(".") and filename.endswith("wav"):
             audio_file_list.append(os.path.join(os.getcwd(), "audio/"+filename))
 
-    mlcat("Deepspeech", "Welcome to a demo of pre-built model for deepspeech. TThis model is trained by machine learning techniques based "
+    mlcat("Deepspeech", "Welcome to a demo of Mozilla's Deepspeech pre-built model for speech to text. This model is trained by machine learning techniques based "
                         "on Baidu's Deep Speech research paper (https://arxiv.org/abs/1412.5567), and implemented by Mozilla."
-                        "In this speech recognition system, the audio will be converted into text.\n")
+                        "In this demo, the audio will be played and then transcribed to text. \n")
     mlask()
-    mlcat("Demonstration", "Next we will demonstrate three examples from Mozilla example audio files.\n")
-    mlask()
-    mlcat("First","The transcription in the first audio is Experience proves this.\n")
+
+    # -----------------------------------------------------------------------
+    # First audio
+    # -----------------------------------------------------------------------
+    playsound(audio_file_list[0])
+    mlcat("Experience proves this.", "The audio has been played and if you listen carefully you should hear:\n")
+    mlcat("", "Experience proves this.\n")
     mlask()
     utils.deepspeech(model, scorer, audio_file_list[0], args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
     mlask()
-    mlcat("Second", "The transcription in the second audio is Why should one halt on the way?\n")
+
+    # -----------------------------------------------------------------------
+    # Second audio
+    # -----------------------------------------------------------------------
+    playsound(audio_file_list[1])
+    mlcat("Why should one halt on the way?", "The audio has been played and if you listen carefully you should hear:\n")
+    mlcat("", "Why should one halt on the way?\n")
     mlask()
     utils.deepspeech(model, scorer, audio_file_list[1], args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
     mlask()
-    mlcat("Third", "The transcription in the third audio is Your power is sufficient I said.\n")
+
+    # -----------------------------------------------------------------------
+    # Third audio
+    # -----------------------------------------------------------------------
+    playsound(audio_file_list[2])
+    mlcat("Your power is sufficient I said.", "The audio has been played and if you listen carefully you should hear:\n")
+    mlcat("", "Your power is sufficient I said.\n")
     mlask()
     utils.deepspeech(model, scorer, audio_file_list[2], args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)

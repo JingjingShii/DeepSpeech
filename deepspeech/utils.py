@@ -144,7 +144,7 @@ def deepspeech(model, scorer, audio, beam_width = "", lm_alpha = "", lm_beta = "
             audio_length = fin.getnframes() * (1/fs_orig)
             fin.close()
 
-            print('Running inference...', file=sys.stderr)
+            print('Running inference to transcribe the audio...', file=sys.stderr)
             inference_start = timer()
             # sphinx-doc: python_ref_inference_start
             if extended:
