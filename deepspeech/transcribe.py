@@ -3,7 +3,6 @@ import argparse
 import os
 
 def main():
-
     scorer = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.scorer")
     model = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.pbmm")
 
@@ -29,7 +28,7 @@ def main():
                         help='Number of candidate transcripts to include in JSON output')
     parser.add_argument('--hot_words', type=str,
                         help='Hot-words and their boosts.')
-    parser.add_argument('--verbose', type=bool, default= True,
+    parser.add_argument('--verbose', default=True,
                         help='If print out all the message')
     args = parser.parse_args()
 
