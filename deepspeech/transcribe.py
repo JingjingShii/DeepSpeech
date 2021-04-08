@@ -1,12 +1,18 @@
 import utils
 import argparse
 import os
-import tarfile
-from mlhub.pkg import mlask, mlcat
 
 def main():
+
+    scorer = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.scorer")
+    model = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.pbmm")
+
     parser = argparse.ArgumentParser(description='Running DeepSpeech inference.')
 
+    parser.add_argument('--model', default= model,
+                         help='Path to the model (protocol buffer binary file)')
+    parser.add_argument('--scorer', default=scorer,
+                        help='Path to the external scorer file')
     parser.add_argument('--audio', required=True,
                         help='Path to the audio file to run (WAV format)')
     parser.add_argument('--beam_width', type=int,
@@ -25,10 +31,7 @@ def main():
                         help='Hot-words and their boosts.')
     args = parser.parse_args()
 
-    scorer = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.scorer")
-    model = os.path.join(os.getcwd(), "deepspeech-0.9.3-models.pbmm")
-
-    utils.deepspeech(model, scorer, args.audio, args.beam_width, args.lm_alpha,
+    utils.deepspeech(args.model, args.scorer, args.audio, args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
 
 

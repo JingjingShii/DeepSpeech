@@ -74,7 +74,7 @@ def main():
     # -----------------------------------------------------------------------
     # Third audio
     # -----------------------------------------------------------------------
-    os.system(f'aplay {audio_file_list[3]}')
+    os.system(f'aplay {audio_file_list[2]}')
     mlcat("Your power is sufficient I said.", "The audio has been played and if you listen carefully you should hear:\n")
     mlcat("", "Your power is sufficient I said.\n")
     mlask()
