@@ -144,19 +144,19 @@ def deepspeech(model, scorer, audio, verbose=True, beam_width = "", lm_alpha = "
             fin.close()
 
             if verbose==True:
-                print('\nRunning inference to transcribe the audio...\n', file=sys.stderr)
+                print('\nRunning inference to transcribe the audio...', file=sys.stderr)
             inference_start = timer()
             # sphinx-doc: python_ref_inference_start
             if extended:
-                print("\t" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
+                print("\n\t" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
             elif json:
-                print("\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
+                print("\n\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
             else:
-                print("\t" + ds.stt(audio)+"\n")
+                print("\n\t" + ds.stt(audio)+"\n")
             # sphinx-doc: python_ref_inference_stop
             inference_end = timer() - inference_start
             if verbose==True:
-                print('Inference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length)+"\n", file=sys.stderr)
+                print('\nInference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length)+"\n", file=sys.stderr)
 
     else:
         fin = wave.open(audio, 'rb')
@@ -174,17 +174,17 @@ def deepspeech(model, scorer, audio, verbose=True, beam_width = "", lm_alpha = "
         fin.close()
 
         if verbose==True:
-            print('\nRunning inference to transcribe the audio...\n', file=sys.stderr)
+            print('\nRunning inference to transcribe the audio...', file=sys.stderr)
         inference_start = timer()
         # sphinx-doc: python_ref_inference_start
         if extended:
-            print("\t" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
+            print("\n\t" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
         elif json:
-            print("\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
+            print("\n\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
         else:
-            print("\t" + ds.stt(audio)+"\n")
+            print("\n\t" + ds.stt(audio)+"\n")
         # sphinx-doc: python_ref_inference_stop
         inference_end = timer() - inference_start
         if verbose==True:
-            print('Inference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length)+"\n", file=sys.stderr)
+            print('\nInference took %0.3fs for %0.3fs audio file.' % (inference_end, audio_length)+"\n", file=sys.stderr)
 
