@@ -148,11 +148,11 @@ def deepspeech(model, scorer, audio, verbose=True, beam_width = "", lm_alpha = "
             inference_start = timer()
             # sphinx-doc: python_ref_inference_start
             if extended:
-                print(metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
+                print("\t" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
             elif json:
-                print(metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
+                print("\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
             else:
-                print(ds.stt(audio)+"\n")
+                print("\t" + ds.stt(audio)+"\n")
             # sphinx-doc: python_ref_inference_stop
             inference_end = timer() - inference_start
             if verbose==True:
@@ -178,11 +178,11 @@ def deepspeech(model, scorer, audio, verbose=True, beam_width = "", lm_alpha = "
         inference_start = timer()
         # sphinx-doc: python_ref_inference_start
         if extended:
-            print(metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
+            print("\t" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
         elif json:
-            print(metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
+            print("\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
         else:
-            print(ds.stt(audio)+"\n")
+            print("\t" + ds.stt(audio)+"\n")
         # sphinx-doc: python_ref_inference_stop
         inference_end = timer() - inference_start
         if verbose==True:

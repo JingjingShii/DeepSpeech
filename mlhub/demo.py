@@ -49,6 +49,8 @@ def main():
         if not filename.startswith(".") and filename.endswith("wav"):
             audio_file_list.append(os.path.join(os.getcwd(), "audio/"+filename))
 
+    sorted(audio_file_list)
+
     mlcat("Deepspeech", "Welcome to a demo of Mozilla's Deepspeech pre-built model for speech to text. This model is trained by machine learning techniques based "
                         "on Baidu's Deep Speech research paper (https://arxiv.org/abs/1412.5567), and implemented by Mozilla."
                         "In this demo, the audio will be played and then transcribed to text. \n")
