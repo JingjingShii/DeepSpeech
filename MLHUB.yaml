@@ -1,18 +1,19 @@
 --- # Azure Speech
 meta:
   name         : deepspeech
-  title        : Deepspeech.
+  title        : Deepspeech
   keywords     : deepspeech, speech to text, natural language processing, deep neural networks
-  version      : 0.0.1
+  version      : 0.0.3
   languages    : py
   license      : mit
-  author       : Graham.Williams@microsoft.com
-  url          : https://github.com/JingjingShii/DeepSpeech-1
+  author       : Graham.Williams@microsoft.com, Jingjing.Shi@anu.edu.au
+  url          : https://github.com/JingjingShii/DeepSpeech
 dependencies:
+  system:
+    - sox
   pip3:
     - deepspeech
     - numpy
-    - sox
   files:
     - mlhub/README.md
     - mlhub/demo.py
