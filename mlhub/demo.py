@@ -50,8 +50,8 @@ The audio will be played and if you listen carefully you should hear:
     mlask(begin="\n", end="\n")
     os.system(f'aplay {audio_file_list[0]}')
     mlask(begin="\n", end="\n", prompt="Press Enter to transcribe this audio")
-    utils.deepspeech(model, scorer, audio_file_list[0], "demo", True,
-                     "", "", "", "", "", "", "")
+    ds, desired_sample_rate = utils.load(model, scorer, True, "", "", "", "")
+    utils.deepspeech(ds, desired_sample_rate, audio_file_list[0], "demo", True, "", "", "")
     mlask(end="\n")
 
     # -----------------------------------------------------------------------
@@ -62,8 +62,7 @@ The audio will be played and if you listen carefully you should hear:
     mlask(begin="\n", end="\n")
     os.system(f'aplay {audio_file_list[1]}')
     mlask(begin="\n", end="\n", prompt="Press Enter to transcribe this audio")
-    utils.deepspeech(model, scorer, audio_file_list[1], "demo", True,
-                     "", "", "", "", "", "", "")
+    utils.deepspeech(ds, desired_sample_rate, audio_file_list[1], "demo", True, "", "", "")
     mlask(end="\n")
 
     # -----------------------------------------------------------------------
@@ -74,8 +73,7 @@ The audio will be played and if you listen carefully you should hear:
     mlask(begin="\n", end="\n")
     os.system(f'aplay {audio_file_list[2]}')
     mlask(begin="\n", end="\n", prompt="Press Enter to transcribe this audio")
-    utils.deepspeech(model, scorer, audio_file_list[2], "demo", True,
-                     "", "", "", "", "", "", "")
+    utils.deepspeech(ds, desired_sample_rate, audio_file_list[2], "demo", True, "", "", "")
 
 
 if __name__ == '__main__':

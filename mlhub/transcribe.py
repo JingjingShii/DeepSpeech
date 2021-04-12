@@ -51,8 +51,9 @@ def main():
     else:
         path = os.path.join(get_cmd_cwd(), path)
 
-    utils.deepspeech(args.model, args.scorer, path, "transcribe", False, args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
+    ds, desired_sample_rate = utils.load(args.model, args.scorer, False, args.beam_width, args.lm_alpha,
+                     args.lm_beta, args.hot_words)
+    utils.deepspeech(ds, desired_sample_rate, path, "transcribe", False, args.extended, args.json, args.candidate_transcripts)
 
 
 if __name__ == '__main__':
