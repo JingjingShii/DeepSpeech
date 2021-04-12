@@ -42,7 +42,7 @@ def main():
     mlask(begin="\n")
     os.system(f'aplay {audio_file_list[0]}')
     mlask(begin="\n", end="\n")
-    utils.deepspeech(model, scorer, audio_file_list[0], "demo", "", "", "", "", "", "", "", "")
+    utils.deepspeech(model, scorer, audio_file_list[0], "demo", True, "", "", "", "", "", "", "")
     mlask(end="\n")
 
     # -----------------------------------------------------------------------
@@ -56,7 +56,7 @@ def main():
     mlask(begin="\n")
     os.system(f'aplay {audio_file_list[1]}')
     mlask(begin="\n", end="\n")
-    utils.deepspeech(model, scorer, audio_file_list[1], "demo", "", "", "", "", "", "", "", "")
+    utils.deepspeech(model, scorer, audio_file_list[1], "demo", True, "", "", "", "", "", "", "")
     mlask(end="\n")
 
     # -----------------------------------------------------------------------
@@ -70,7 +70,7 @@ def main():
     mlask(begin="\n")
     os.system(f'aplay {audio_file_list[2]}')
     mlask(begin="\n", end="\n")
-    utils.deepspeech(model, scorer, audio_file_list[2], "demo", "", "", "", "", "", "", "", "")
+    utils.deepspeech(model, scorer, audio_file_list[2], "demo", True, "", "", "", "", "", "", "")
 
 
 if __name__ == '__main__':
