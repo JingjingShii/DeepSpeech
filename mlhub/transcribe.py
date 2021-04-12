@@ -1,6 +1,12 @@
 import utils
 import argparse
 import os
+import sys
+
+from mlhub.pkg import is_url
+from mlhub.utils import get_cmd_cwd
+import requests
+
 
 def main():
 
@@ -33,11 +39,20 @@ def main():
                         help='Number of candidate transcripts to include in JSON output')
     parser.add_argument('--hot_words', type=str,
                         help='Hot-words and their boosts.')
-    parser.add_argument('--verbose', default=True,
-                        help='If print out all the message')
     args = parser.parse_args()
 
-    utils.deepspeech(args.model, args.scorer, args.audio, args.verbose, args.beam_width, args.lm_alpha,
+    path = args.audio
+
+    if is_url(path):
+        response = requests.get(path)
+        if response.status_code != 200:
+            print(f"The URL does not appear to exist. Please check.\n    {path}")
+            sys.exit()
+    else:
+        path = os.path.join(get_cmd_cwd(), path)
+        print(get_cmd_cwd())
+    print(path)
+    utils.deepspeech(args.model, args.scorer, path, "transcribe", False, args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
 
 

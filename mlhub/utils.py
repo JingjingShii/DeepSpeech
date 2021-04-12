@@ -83,7 +83,7 @@ def metadata_json_output(metadata):
     } for transcript in metadata.transcripts]
     return json.dumps(json_result, indent=2)
 
-def deepspeech(model, scorer, audio, verbose=True, beam_width = "", lm_alpha = "", lm_beta = "", extended = "", json = "", candidate_transcripts = "", hot_words = ""):
+def deepspeech(model, scorer, audio, type, verbose=True, beam_width = "", lm_alpha = "", lm_beta = "", extended = "", json = "", candidate_transcripts = "", hot_words = ""):
 
     model_load_start = timer()
     # sphinx-doc: python_ref_model_start
@@ -177,12 +177,23 @@ def deepspeech(model, scorer, audio, verbose=True, beam_width = "", lm_alpha = "
             print('\nRunning inference to transcribe the audio...', file=sys.stderr)
         inference_start = timer()
         # sphinx-doc: python_ref_inference_start
-        if extended:
-            print("\n\t" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
-        elif json:
-            print("\n\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
-        else:
-            print("\n\t" + ds.stt(audio)+"\n")
+        if type == "demo":
+            if extended:
+                print("\n\t" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
+            elif json:
+                print("\n\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
+            else:
+                print("\n\t" + ds.stt(audio)+"\n")
+
+        elif type == "transcribe":
+            if extended:
+                print("\n" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
+            elif json:
+                print("\n" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
+            else:
+                print("\n" + ds.stt(audio)+"\n")
+
+
         # sphinx-doc: python_ref_inference_stop
         inference_end = timer() - inference_start
         if verbose==True:
