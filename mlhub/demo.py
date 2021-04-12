@@ -43,8 +43,8 @@ In this demo, the audio will be played and then transcribed to text.
     mlcat("",
           """Experience proves this.""")
     mlask(begin="\n")
-    os.system(f'aplay {audio_file_list[0]}')
-    mlask(begin="\n", end="\n")
+    os.system(f'aplay {audio_file_list[0]} >/dev/null 2>&1')
+    mlask()
     ds, desired_sample_rate = utils.load(model, scorer, True, "", "", "", "")
     utils.deepspeech(ds, desired_sample_rate, audio_file_list[0], "demo", True, "", "", "")
 
@@ -59,8 +59,8 @@ In this demo, the audio will be played and then transcribed to text.
     mlcat("",
           """Why should one halt on the way?""")
     mlask(begin="\n")
-    os.system(f'aplay {audio_file_list[1]}')
-    mlask(begin="\n", end="\n")
+    os.system(f'aplay {audio_file_list[1]} >/dev/null 2>&1')
+    mlask()
     utils.deepspeech(ds, desired_sample_rate, audio_file_list[1], "demo", True, "", "", "")
     mlask(end="\n")
 
@@ -73,8 +73,8 @@ In this demo, the audio will be played and then transcribed to text.
     mlcat("",
           """Your power is sufficient I said.""")
     mlask(begin="\n")
-    os.system(f'aplay {audio_file_list[2]}')
-    mlask(begin="\n", end="\n")
+    os.system(f'aplay {audio_file_list[2]} >/dev/null 2>&1')
+    mlask()
     utils.deepspeech(ds, desired_sample_rate, audio_file_list[2], "demo", True, "", "", "")
 
 
