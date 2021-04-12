@@ -187,11 +187,11 @@ def deepspeech(model, scorer, audio, type, verbose=True, beam_width = "", lm_alp
 
         elif type == "transcribe":
             if extended:
-                print("\n" + metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0])+"\n")
+                print(metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0]))
             elif json:
-                print("\n" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts))+"\n")
+                print(metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts)))
             else:
-                print("\n" + ds.stt(audio)+"\n")
+                print(ds.stt(audio))
 
 
         # sphinx-doc: python_ref_inference_stop
