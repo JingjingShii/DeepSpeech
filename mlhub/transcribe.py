@@ -23,8 +23,8 @@ def main():
                          help='Path to the model (protocol buffer binary file)')
     parser.add_argument('--scorer', default=scorer,
                         help='Path to the external scorer file')
-    parser.add_argument('--audio', required=True,
-                        help='Path to the audio file to run (WAV format)')
+    parser.add_argument('audio',
+                        help='path or url to wav file')
     parser.add_argument('--beam_width', type=int,
                         help='Beam width for the CTC decoder')
     parser.add_argument('--lm_alpha', type=float,
@@ -50,7 +50,7 @@ def main():
             sys.exit()
     else:
         path = os.path.join(get_cmd_cwd(), path)
-        
+
     utils.deepspeech(args.model, args.scorer, path, "transcribe", False, args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
 
