@@ -120,6 +120,7 @@ def load(model, scorer, verbose=True, beam_width="", lm_alpha="", lm_beta="", ho
         for word_boost in hot_words.split(','):
             word, boost = word_boost.split(':')
             ds.addHotWord(word, float(boost))
+    print("\n")
     return ds, desired_sample_rate
 
 
