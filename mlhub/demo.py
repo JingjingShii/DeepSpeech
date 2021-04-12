@@ -73,7 +73,6 @@ The audio will be played and if you listen carefully you should hear:
     mlask(begin="\n", end="\n")
     os.system(f'aplay {audio_file_list[2]} >/dev/null 2>&1')
     mlask(begin="\n", end="\n", prompt="Press Enter to transcribe this audio")
-    mlask()
     utils.deepspeech(ds, desired_sample_rate, audio_file_list[2], "demo", True, "", "", "")
 
 
