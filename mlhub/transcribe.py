@@ -50,8 +50,7 @@ def main():
             sys.exit()
     else:
         path = os.path.join(get_cmd_cwd(), path)
-        print(get_cmd_cwd())
-    print(path)
+        
     utils.deepspeech(args.model, args.scorer, path, "transcribe", False, args.beam_width, args.lm_alpha,
                      args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
 
