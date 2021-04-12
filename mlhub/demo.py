@@ -49,7 +49,7 @@ The audio will be played and if you listen carefully you should hear:
     mlcat("Audio Example 1", msg + "\"Experience proves this.\"")
     mlask(begin="\n", end="\n")
     os.system(f'aplay {audio_file_list[0]} >/dev/null 2>&1')
-    mlask(begin="\n", end="\n", prompt="Press Enter to transcribe this audio")
+    mlask(end="\n", prompt="Press Enter to transcribe this audio")
     ds, desired_sample_rate = utils.load(model, scorer, True, "", "", "", "")
     utils.deepspeech(ds, desired_sample_rate, audio_file_list[0], "demo", True, "", "", "")
     mlask(end="\n")
@@ -61,7 +61,7 @@ The audio will be played and if you listen carefully you should hear:
     mlcat("Audio Example 2", msg + "\"Why should one halt on the way?\"")
     mlask(begin="\n", end="\n")
     os.system(f'aplay {audio_file_list[1]} >/dev/null 2>&1')
-    mlask(begin="\n", end="\n", prompt="Press Enter to transcribe this audio")
+    mlask(end="\n", prompt="Press Enter to transcribe this audio")
     utils.deepspeech(ds, desired_sample_rate, audio_file_list[1], "demo", True, "", "", "")
     mlask(end="\n")
 
@@ -72,7 +72,7 @@ The audio will be played and if you listen carefully you should hear:
     mlcat("Audio Example 3", msg + "\"Your power is sufficient I said.\"")
     mlask(begin="\n", end="\n")
     os.system(f'aplay {audio_file_list[2]} >/dev/null 2>&1')
-    mlask(begin="\n", end="\n", prompt="Press Enter to transcribe this audio")
+    mlask(end="\n", prompt="Press Enter to transcribe this audio")
     utils.deepspeech(ds, desired_sample_rate, audio_file_list[2], "demo", True, "", "", "")
 
 
