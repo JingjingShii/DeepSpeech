@@ -4,32 +4,8 @@ import os
 import tarfile
 from mlhub.pkg import mlask, mlcat
 
-def main():
-    parser = argparse.ArgumentParser(description='Running DeepSpeech inference.')
-    # parser.add_argument('--model', required=True,
-    #                      help='Path to the model (protocol buffer binary file)')
-    # parser.add_argument('--scorer', required=False,
-    #                     help='Path to the external scorer file')
-    # parser.add_argument('--audio', required=True,
-    #                     help='Path to the audio file to run (WAV format)')
-    parser.add_argument('--beam_width', type=int,
-                        help='Beam width for the CTC decoder')
-    parser.add_argument('--lm_alpha', type=float,
-                        help='Language model weight (lm_alpha). If not specified, use default from the scorer package.')
-    parser.add_argument('--lm_beta', type=float,
-                        help='Word insertion bonus (lm_beta). If not specified, use default from the scorer package.')
-    parser.add_argument('--extended', required=False, action='store_true',
-                        help='Output string from extended metadata')
-    parser.add_argument('--json', required=False, action='store_true',
-                        help='Output json from metadata with timestamp of each word')
-    parser.add_argument('--candidate_transcripts', type=int, default=3,
-                        help='Number of candidate transcripts to include in JSON output')
-    parser.add_argument('--hot_words', type=str,
-                        help='Hot-words and their boosts.')
-    parser.add_argument('--verbose', default=True,
-                        help='If print out all the message')
-    args = parser.parse_args()
 
+def main():
     # -----------------------------------------------------------------------
     # Load pre-built models and samples
     # -----------------------------------------------------------------------
@@ -47,55 +23,54 @@ def main():
 
     for filename in os.listdir(audio_path):
         if not filename.startswith(".") and filename.endswith("wav"):
-            audio_file_list.append(os.path.join(os.getcwd(), "audio/"+filename))
+            audio_file_list.append(os.path.join(os.getcwd(), "audio/" + filename))
 
     sorted(audio_file_list)
 
-    mlcat("Deepspeech", "Welcome to a demo of Mozilla's Deepspeech pre-built model for speech to text. This model is trained by machine learning techniques based "
-                        "on Baidu's Deep Speech research paper (https://arxiv.org/abs/1412.5567), and implemented by Mozilla."
-                        "In this demo, the audio will be played and then transcribed to text. \n")
-    mlask()
+    mlcat("Deepspeech","""Welcome to a demo of Mozilla's Deepspeech pre-built model for speech to text. This model is trained by machine learning techniques based on Baidu's Deep Speech research paper (
+    https://arxiv.org/abs/1412.5567), and implemented by Mozilla. In this demo, the audio will be played and then transcribed to text.""")
+    mlask(begin="\n", end="\n")
 
     # -----------------------------------------------------------------------
     # First audio
     # -----------------------------------------------------------------------
-    print("\n")
+
+    mlcat("Experience proves this.",
+          """The audio will be played and if you listen carefully you should hear:\n""")
+    mlcat("",
+          """Experience proves this.""")
+    mlask(begin="\n")
     os.system(f'aplay {audio_file_list[0]}')
-    print("\n")
-    mlcat("Experience proves this.", "The audio has been played and if you listen carefully you should hear:\n")
-    mlcat("", "Experience proves this.\n")
-    mlask()
-    print("\n")
-    utils.deepspeech(model, scorer, audio_file_list[0], args.verbose, args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
-    mlask()
+    mlask(begin="\n", end="\n")
+    utils.deepspeech(model, scorer, audio_file_list[0], "demo", "", "", "", "", "", "", "", "")
+    mlask(end="\n")
 
     # -----------------------------------------------------------------------
     # Second audio
     # -----------------------------------------------------------------------
-    print("\n")
+
+    mlcat("Why should one halt on the way?",
+          """The audio will be played and if you listen carefully you should hear:\n""")
+    mlcat("",
+          """Why should one halt on the way?""")
+    mlask(begin="\n")
     os.system(f'aplay {audio_file_list[1]}')
-    print("\n")
-    mlcat("Why should one halt on the way?", "The audio has been played and if you listen carefully you should hear:\n")
-    mlcat("", "Why should one halt on the way?\n")
-    mlask()
-    print("\n")
-    utils.deepspeech(model, scorer, audio_file_list[1], args.verbose, args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
-    mlask()
+    mlask(begin="\n", end="\n")
+    utils.deepspeech(model, scorer, audio_file_list[1], "demo", "", "", "", "", "", "", "", "")
+    mlask(end="\n")
 
     # -----------------------------------------------------------------------
     # Third audio
     # -----------------------------------------------------------------------
-    print("\n")
+
+    mlcat("Your power is sufficient I said.",
+          """The audio will be played and if you listen carefully you should hear:\n""")
+    mlcat("",
+          """Your power is sufficient I said.""")
+    mlask(begin="\n")
     os.system(f'aplay {audio_file_list[2]}')
-    print("\n")
-    mlcat("Your power is sufficient I said.", "The audio has been played and if you listen carefully you should hear:\n")
-    mlcat("", "Your power is sufficient I said.\n")
-    mlask()
-    print("\n")
-    utils.deepspeech(model, scorer, audio_file_list[2], args.verbose, args.beam_width, args.lm_alpha,
-                     args.lm_beta, args.extended, args.json, args.candidate_transcripts, args.hot_words)
+    mlask(begin="\n", end="\n")
+    utils.deepspeech(model, scorer, audio_file_list[2], "demo", "", "", "", "", "", "", "", "")
 
 
 if __name__ == '__main__':
