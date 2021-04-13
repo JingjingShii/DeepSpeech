@@ -28,3 +28,7 @@ endif
 ifneq ("$(wildcard $(INC_CLEAN))","")
   include $(INC_CLEAN)
 endif
+
+local:
+	install demo.py utils.py transcribe.py ~/.mlhub/deepspeech/
+

@@ -94,7 +94,8 @@ def load(model, scorer, verbose=True, beam_width="", lm_alpha="", lm_beta="", ho
     ds = Model(model)
     # sphinx-doc: python_ref_model_stop
     model_load_end = timer() - model_load_start
-    if verbose == True:
+    if verbose==True:
+        print('\nLoading model from files {}'.format(model), file=sys.stderr)
         print('Loaded model in {:.3}s.'.format(model_load_end), file=sys.stderr)
 
     if beam_width:
@@ -120,7 +121,6 @@ def load(model, scorer, verbose=True, beam_width="", lm_alpha="", lm_beta="", ho
         for word_boost in hot_words.split(','):
             word, boost = word_boost.split(':')
             ds.addHotWord(word, float(boost))
-    print("\n")
     return ds, desired_sample_rate
 
 
@@ -197,8 +197,8 @@ def deepspeech(ds, desired_sample_rate, audio, type, verbose=True, extended="", 
             elif json:
                 print("\n\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts)))
             else:
-                print("\n\t" + ds.stt(audio))
-
+                print("\n\t\"" + ds.stt(audio) + "\"")
+               print("\n\t" + ds.stt(audio))
         elif type == "transcribe":
             if extended:
                 print(metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0]))
