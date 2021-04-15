@@ -198,7 +198,7 @@ def deepspeech(ds, desired_sample_rate, audio, type, verbose=True, extended="", 
                 print("\n\t" + metadata_json_output(ds.sttWithMetadata(audio, candidate_transcripts)))
             else:
                 print("\n\t\"" + ds.stt(audio) + "\"")
-               print("\n\t" + ds.stt(audio))
+                print("\n\t" + ds.stt(audio))
         elif type == "transcribe":
             if extended:
                 print(metadata_to_string(ds.sttWithMetadata(audio, 1).transcripts[0]))
